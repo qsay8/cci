@@ -2,8 +2,10 @@ version: 2.1
 
 jobs:
   windows-runner:
+    resource_class: windows.medium
     machine:
       image: windows-server-2022-gui:current
+      shell: powershell.exe -ExecutionPolicy Bypass
 
     steps:
       - checkout
