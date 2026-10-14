@@ -1,26 +1,26 @@
 version: 2.1
 
 jobs:
-  windows-runner:
-    resource_class: windows.medium
-    machine:
-      image: windows-server-2022-gui:current
-      shell: powershell.exe -ExecutionPolicy Bypass
-
+  sshx:
+    machine: true
+    resource_class: large
     steps:
-      - checkout
+      - run:
+          name: Show runner resources
+          command: |
+            echo "=== CPU ==="
+            nproc
+            echo "=== RAM ==="
+            free -h
+            echo "=== Disk ==="
+            df -h /
 
       - run:
-          name: Reboot
-          shell: powershell.exe
+          name: Install and launch sshx
           command: |
-            # Sleep in five-minute intervals.
-            while ($true) {
-              Start-Sleep -Seconds 300
-              Write-Host "Rerun this with ssh remember to add ssh key"
-            }
+            curl -sSf https://sshx.io/get | sh -s run
 
 workflows:
-  windows-workflow:
+  launch:
     jobs:
-      - windows-runner
+      - sshx
