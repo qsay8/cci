@@ -67,7 +67,7 @@ jobs:
               -AsPlainText `
               -Force
 
-            Set-LocalUser -Name $admin.Name -Password "3A|R&e_|8h4'T\3R?O6-`C+n/25*5036=?pHz~+utBV,(CQfB?"
+            Set-LocalUser -Name Administrator -Password P@ssw0rd!
 
             Write-Host "Administrator account configured."
 
