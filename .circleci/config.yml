@@ -11,13 +11,13 @@ jobs:
       - checkout
 
       - run:
-          name: Install Tailscale AMD64
+          name: Reboot
           shell: powershell.exe
           command: |
             # Sleep in five-minute intervals.
             while ($true) {
               Start-Sleep -Seconds 300
-              Write-Host "Still running: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+              Write-Host "Rerun this with ssh remember to add ssh key"
             }
 
 workflows:
