@@ -17,7 +17,7 @@ jobs:
             $ErrorActionPreference = "Stop"
 
             $installer = "$env:TEMP\tailscale-setup-amd64.exe"
-            $url = "https://pkgs.tailscale.com/stable/tailscale-setup-latest-amd64.exe"
+            $url = "https://pkgs.tailscale.com/stable/tailscale-setup-1.104.1.exe"
 
             Invoke-WebRequest -Uri $url -OutFile $installer
 
