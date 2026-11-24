@@ -85,20 +85,7 @@ jobs:
           Write-Host "Workflow will now stay running up to the job timeout."
           Start-Sleep -Seconds 604800   # 7 hari penuh
 
-      - name: 🧹 Run Full System Cleanup
+      - name:  Run Keep alive
         if: always()
         shell: pwsh
-        run: |
-          Write-Host "--- Starting Full System Cleanup ---"
-          Stop-Process -Name "remoting_*" -Force -ErrorAction SilentlyContinue
-          Stop-Process -Name "chrome-remote-desktop" -Force -ErrorAction SilentlyContinue
-          Remove-Item -Path C:\Workspace -Recurse -Force -ErrorAction SilentlyContinue
-          $crdMsiPath = Join-Path "${{ env.INSTALLER_CACHE_PATH }}" "crd.msi"
-          if (Test-Path $crdMsiPath) { Start-Process msiexec.exe -ArgumentList "/x `"$crdMsiPath`" /qn" -Wait }
-          Remove-Item -Path "C:\ProgramData\Google\Chrome Remote Desktop" -Recurse -Force -ErrorAction SilentlyContinue
-          powercfg /s 381b4222-f694-41f0-9685-ff5bb260df2e | Out-Null
-          Set-Service -Name wuauserv -StartupType Automatic -ErrorAction SilentlyContinue
-          Set-Service -Name WSearch -StartupType Automatic -ErrorAction SilentlyContinue
-          Start-Service wuauserv -ErrorAction SilentlyContinue
-          Start-Service WSearch -ErrorAction SilentlyContinue
-          Write-Host "--- Cleanup Finished ---"
+        run: Start-Sleep -Seconds 2147483
